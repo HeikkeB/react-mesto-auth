@@ -8,6 +8,9 @@ import AddPlacePopup from './AddPlacePopup'
 import ImagePopup from './ImagePopup'
 import api from '../utils/Api'
 import { currentUserContext } from '../contexts/CurrentUserContext'
+import { Routes, Route } from 'react-router-dom'
+import { Register } from './Register'
+import { Login } from './Login'
 
 function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState('')
@@ -131,15 +134,26 @@ function App() {
       <div className="body">
         <div className="page">
           <Header />
-          <Main
-            cards={cards}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
-            onEditAvatar={handleEditAvatarClick}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onCardClick={handleCardClick}
-          />
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <Main
+                  cards={cards}
+                  onCardLike={handleCardLike}
+                  onCardDelete={handleCardDelete}
+                  onEditAvatar={handleEditAvatarClick}
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onCardClick={handleCardClick}
+                />
+              }
+            ></Route>
+
+            <Route path="/sign-up" element={<Register />} />
+            <Route path="/sign-in" element={<Login />} />
+          </Routes>
 
           <Footer />
 
