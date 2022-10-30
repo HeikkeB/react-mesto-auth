@@ -1,0 +1,15 @@
+.auth__submit-btn {
+  margin: 186px 0 0;
+  width: 358px;
+  height: 50px;
+  background: #ffffff;
+  border-radius: 2px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  border: none;
+  text-align: center;
+  color: #000000;
+}

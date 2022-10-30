@@ -1,0 +1,23 @@
+.auth__input {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  padding-bottom: 13px;
+  margin-bottom: 30px;
+  color: #ffffff;
+  background: none;
+  width: 358px;
+  border: none;
+  border-bottom: 2px solid #cccccc;
+  outline: none;
+}
+
+.auth__input::-webkit-input-placeholder {
+  color: #cccccc;
+}
+
+.auth__input::-moz-placeholder {
+  color: #cccccc;
+}
