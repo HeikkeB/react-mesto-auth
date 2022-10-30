@@ -1,0 +1,11 @@
+.popup__gallery-description {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FFF;
+    text-align: start;
+    margin: 0;
+    padding-top: 10px;
+}

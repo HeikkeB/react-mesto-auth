@@ -1,0 +1,11 @@
+.element__img {
+    width: 282px;
+    min-height: 282px;
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+}
+
+.element__img:hover {
+    cursor: pointer;
+}

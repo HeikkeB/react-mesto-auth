@@ -1,0 +1,19 @@
+.popup__section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 358px;
+    margin: 0 0 43px;
+}
+
+.popup__section:last-of-type {
+    margin: 0 0 61px;
+}
+
+@media screen and (max-width: 600px) {
+    .popup__section {
+        align-items: center;
+        width: 282px;
+    }
+}
