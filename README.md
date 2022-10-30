@@ -6,12 +6,12 @@
 
 ## Использованные технологии
 
-- HTML5
-- CSS
-- grid
-- flexbox
-- адаптивная верстка с помощью media-queries
-- React
-- организация файловой структуры по схеме Nested
-- БЭМ для классов
-- API запросы
+![https://img.shields.io/badge/-ReactJS-blue](https://img.shields.io/badge/-ReactJS-blue)
+![https://img.shields.io/badge/-HTML5-orange](https://img.shields.io/badge/-HTML5-orange)
+![https://img.shields.io/badge/-CSS-informational](https://img.shields.io/badge/-CSS-informational)
+![https://img.shields.io/badge/-grid-green](https://img.shields.io/badge/-grid-green)
+![https://img.shields.io/badge/-flexbox-red](https://img.shields.io/badge/-flexbox-red)
+![https://img.shields.io/badge/-media--queries-blueviolet](https://img.shields.io/badge/-media--queries-blueviolet)
+![https://img.shields.io/badge/-Nested-success](https://img.shields.io/badge/-Nested-success)
+![https://img.shields.io/badge/-BEM-9cf](https://img.shields.io/badge/-BEM-9cf)
+![https://img.shields.io/badge/-API-yellowgreen](https://img.shields.io/badge/-API-yellowgreen)
