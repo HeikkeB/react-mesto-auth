@@ -1,12 +1,8 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
+import { LoggedContext } from '../contexts/LoggedContext'
 
-export const ProtectedRoute = ({ component: Component, ...props }) => {
-  return (
-    <Route>
-      {() =>
-        loggedIn ? <Component {...props} /> : <Redirect to="./sign-up" />
-      }
-    </Route>
-  )
+export const ProtectedRoute = ({ children }) => {
+  const loggedIn = React.useContext(LoggedContext)
+  return loggedIn ? children : <Navigate to="/sign-in" />
 }
