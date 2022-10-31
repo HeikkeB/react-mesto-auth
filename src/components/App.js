@@ -11,6 +11,7 @@ import { currentUserContext } from '../contexts/CurrentUserContext'
 import { Routes, Route } from 'react-router-dom'
 import { Register } from './Register'
 import { Login } from './Login'
+import { InfoTooltip } from './InfoTooltip'
 
 function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState('')
@@ -174,6 +175,7 @@ function App() {
           />
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+          <InfoTooltip />
         </div>
       </div>
     </currentUserContext.Provider>
