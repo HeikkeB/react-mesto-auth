@@ -15,3 +15,4 @@
 ![https://img.shields.io/badge/-Nested-success](https://img.shields.io/badge/-Nested-success)
 ![https://img.shields.io/badge/-BEM-9cf](https://img.shields.io/badge/-BEM-9cf)
 ![https://img.shields.io/badge/-API-yellowgreen](https://img.shields.io/badge/-API-yellowgreen)
+![https://img.shields.io/badge/-React%20Router%206-red](https://img.shields.io/badge/-React%20Router%206-red)
