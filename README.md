@@ -1,4 +1,4 @@
-#["Место React"](https://heikkeb.github.io/react-mesto-auth/)
+[#"Место React"](https://heikkeb.github.io/react-mesto-auth/)
 
 ## Описание
 
