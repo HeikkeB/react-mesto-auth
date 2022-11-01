@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export function Register() {
+export function Register({ handleRegister }) {
   return (
     <div className="register">
       <div className="auth__container">
@@ -24,9 +25,9 @@ export function Register() {
           />
           <button className="auth__submit-btn">Зарегистрироваться</button>
         </form>
-        <a className="auth__link" href="#">
+        <Link to="/sign-in" className="auth__link">
           Уже зарегистрированы? Войти
-        </a>
+        </Link>
       </div>
     </div>
   )

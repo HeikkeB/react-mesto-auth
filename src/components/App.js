@@ -14,6 +14,7 @@ import { Register } from './Register'
 import { Login } from './Login'
 import { InfoTooltip } from './InfoTooltip'
 import { ProtectedRoute } from './ProtectedRoute'
+import * as auth from '../utils/auth'
 
 function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState('')
@@ -22,9 +23,10 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState('')
   const [currentUser, setCurrentUser] = React.useState({})
   const [cards, setCards] = React.useState([])
-  const [loggedIn, setLoggedIn] = React.useState(true)
+  const [loggedIn, setLoggedIn] = React.useState(false)
   const [currentEmail, setCurrentEmail] = React.useState([])
   const [infoTooltip, setInfoTooltip] = React.useState('')
+  const [successfulReg, setSuccesfulReg] = React.useState(false)
   const history = useNavigate()
   React.useEffect(() => {
     api
@@ -144,6 +146,21 @@ function App() {
     setLoggedIn(false)
   }
 
+  function handleRegister(password, email) {
+    auth
+      .register(password, email)
+      .then((res) => {
+        if (res.statusCode !== 400) {
+          setSuccesfulReg(true)
+          history('/sign-in')
+        }
+      })
+      .catch((err) => {
+        setSuccesfulReg(false)
+        return console.log(err)
+      })
+  }
+
   return (
     <currentUserContext.Provider value={currentUser}>
       <LoggedContext.Provider value={loggedIn}>
@@ -168,7 +185,10 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route path="/sign-up" element={<Register />} />
+              <Route
+                path="/sign-up"
+                element={<Register handleRegister={handleRegister} />}
+              />
               <Route path="/sign-in" element={<Login />} />
             </Routes>
 
