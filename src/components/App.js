@@ -165,6 +165,18 @@ function App() {
       })
   }
 
+  function handleAuthorize(email, password) {
+    auth
+      .authorize(email, password)
+      .then((data) => {
+        if (data.token) {
+          setLoggedIn(true)
+          history('/')
+        }
+      })
+      .catch((err) => console.log(err))
+  }
+
   function handleToken() {
     if (localStorage.getItem('jwt')) {
       const jwt = localStorage.getItem('jwt')
@@ -179,18 +191,6 @@ function App() {
         })
         .catch((err) => console.log(err))
     }
-  }
-
-  function handleAuthorize(email, password) {
-    auth
-      .authorize(email, password)
-      .then((data) => {
-        if (data.token) {
-          setLoggedIn(true)
-          history('/')
-        }
-      })
-      .catch((err) => console.log(err))
   }
 
   return (

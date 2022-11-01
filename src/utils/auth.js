@@ -40,7 +40,6 @@ export const validateJWT = (token) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-  })
-    .then(handleResponse)
-    .then((data) => data)
+  }).then(handleResponse)
+  //.then((data) => data)
 }

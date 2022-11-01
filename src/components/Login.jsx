@@ -17,8 +17,8 @@ export function Login({ handleAuthorize }) {
     setPassword(evt.target.value)
   }
 
-  function handleSubmit(evt) {
-    evt.preventDefault()
+  function handleSubmit() {
+    //evt.preventDefault()
     handleAuthorize(email, password)
   }
 

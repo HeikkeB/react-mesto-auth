@@ -8,7 +8,10 @@
   color: #ffffff;
   text-decoration: none;
   padding: 0;
-  margin: 0;
+  margin: 0 24px 0 0;
   height: 22px;
   cursor: pointer;
+}
+.header__link:last-child {
+  margin-right: 0;
 }
