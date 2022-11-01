@@ -1,31 +1,31 @@
 //const BASE_URL = process.env.REACT_APP_BASE_URL
-const BASE_URL = 'https://auth.nomoreparties.co'
+const base_url = 'https://auth.nomoreparties.co'
 
 function handleResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
 }
 
-export const register = (password, email) => {
-  return fetch(`${BASE_URL}/signup`, {
+export const register = (email, password) => {
+  return fetch(`${base_url}/signup`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ password, email }),
+    body: JSON.stringify({ email, password }),
   })
     .then(handleResponse)
     .then((res) => res)
 }
 
-export const authorize = (password, email) => {
-  return fetch(`${BASE_URL}/signin`, {
+export const authorize = (email, password) => {
+  return fetch(`${base_url}/signin`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ password, email }),
+    body: JSON.stringify({ email, password }),
   })
     .then(handleResponse)
     .then((data) => {
@@ -34,7 +34,7 @@ export const authorize = (password, email) => {
 }
 
 export const validateJWT = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${base_url}/users/me`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

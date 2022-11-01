@@ -143,12 +143,13 @@ function App() {
   }
 
   function handleSignOut() {
+    localStorage.removeItem('jwt')
     setLoggedIn(false)
   }
 
-  function handleRegister(password, email) {
+  function handleRegister(email, password) {
     auth
-      .register(password, email)
+      .register(email, password)
       .then((res) => {
         if (res.statusCode !== 400) {
           setSuccesfulReg(true)
@@ -159,6 +160,21 @@ function App() {
         setSuccesfulReg(false)
         return console.log(err)
       })
+      .finally(() => {
+        setInfoTooltip(true)
+      })
+  }
+
+  function handleAuthorize(email, password) {
+    auth
+      .authorize(email, password)
+      .then((data) => {
+        if (data.token) {
+          setLoggedIn(true)
+          history('/')
+        }
+      })
+      .catch((err) => console.log(err))
   }
 
   return (
@@ -189,7 +205,10 @@ function App() {
                 path="/sign-up"
                 element={<Register handleRegister={handleRegister} />}
               />
-              <Route path="/sign-in" element={<Login />} />
+              <Route
+                path="/sign-in"
+                element={<Login handleAuthorize={handleAuthorize} />}
+              />
             </Routes>
 
             <Footer />
@@ -211,7 +230,7 @@ function App() {
             />
 
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-            <InfoTooltip onClose={closeAllPopups} />
+            <InfoTooltip onClose={closeAllPopups} regStatus={successfulReg} />
           </div>
         </div>
       </LoggedContext.Provider>
