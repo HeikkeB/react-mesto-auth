@@ -50,9 +50,9 @@ function App() {
       })
   }, [])
 
-  function handleLoggedIn() {
-    setLoggedIn(true)
-  }
+  React.useEffect(() => {
+    handleToken()
+  }, [])
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true)
@@ -163,6 +163,22 @@ function App() {
       .finally(() => {
         setInfoTooltip(true)
       })
+  }
+
+  function handleToken() {
+    if (localStorage.getItem('jwt')) {
+      const jwt = localStorage.getItem('jwt')
+      auth
+        .validateJWT(jwt)
+        .then((res) => {
+          if (res) {
+            setCurrentEmail(res.data.email)
+            setLoggedIn(true)
+            history('/')
+          }
+        })
+        .catch((err) => console.log(err))
+    }
   }
 
   function handleAuthorize(email, password) {
