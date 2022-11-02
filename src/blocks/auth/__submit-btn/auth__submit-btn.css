@@ -12,4 +12,10 @@
   border: none;
   text-align: center;
   color: #000000;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.auth__submit-btn:hover {
+  opacity: 0.85;
 }
