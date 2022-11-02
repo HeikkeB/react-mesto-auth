@@ -15,6 +15,7 @@ import { Login } from './Login'
 import { InfoTooltip } from './InfoTooltip'
 import { ProtectedRoute } from './ProtectedRoute'
 import * as auth from '../utils/auth'
+import { PopupWithConfirm } from './PopupWithConfirm'
 
 function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState('')
@@ -27,6 +28,8 @@ function App() {
   const [currentEmail, setCurrentEmail] = React.useState([])
   const [infoTooltip, setInfoTooltip] = React.useState('')
   const [successfulReg, setSuccesfulReg] = React.useState(false)
+  const [withConfirm, setWithConfirm] = React.useState('')
+  const [deleteConfirm, setDeleteConfirm] = React.useState(false)
   const history = useNavigate()
   React.useEffect(() => {
     api
@@ -72,6 +75,7 @@ function App() {
     setAddPlacePopupOpen('')
     setSelectedCard('')
     setInfoTooltip('')
+    setWithConfirm('')
   }
 
   function handleCardClick(card) {
@@ -250,6 +254,11 @@ function App() {
               onClose={closeAllPopups}
               regStatus={successfulReg}
               isOpen={infoTooltip}
+            />
+            <PopupWithConfirm
+              onClose={closeAllPopups}
+              isOpen={withConfirm}
+              confirm={deleteConfirm}
             />
           </div>
         </div>
