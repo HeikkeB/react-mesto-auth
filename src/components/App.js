@@ -246,7 +246,11 @@ function App() {
             />
 
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-            <InfoTooltip onClose={closeAllPopups} regStatus={successfulReg} />
+            <InfoTooltip
+              onClose={closeAllPopups}
+              regStatus={successfulReg}
+              isOpen={infoTooltip}
+            />
           </div>
         </div>
       </LoggedContext.Provider>

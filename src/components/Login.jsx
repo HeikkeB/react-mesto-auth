@@ -18,7 +18,6 @@ export function Login({ handleAuthorize }) {
   }
 
   function handleSubmit() {
-    //evt.preventDefault()
     handleAuthorize(email, password)
   }
 
