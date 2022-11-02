@@ -21,3 +21,9 @@
 .auth__input::-moz-placeholder {
   color: #cccccc;
 }
+
+@media screen and (max-width: 440px) {
+  .auth__input {
+    width: 260px;
+  }
+}

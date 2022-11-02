@@ -20,3 +20,15 @@
 .header__link:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 940px) {
+  .header__link:last-child {
+    margin-right: 27px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .header__link {
+    font-size: 14px;
+  }
+}
