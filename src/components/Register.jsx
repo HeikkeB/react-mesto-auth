@@ -47,6 +47,8 @@ export function Register({ handleRegister }) {
             value={password}
             onChange={changePassword}
             required
+            minLength="6"
+            maxLength="18"
           />
           <button className="auth__submit-btn">Зарегистрироваться</button>
         </form>
