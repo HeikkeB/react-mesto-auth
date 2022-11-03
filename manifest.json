@@ -2,7 +2,7 @@
   "short_name": "Mesto React",
   "name": "Mesto React Auth",
   "icons": [],
-  "start_url": "https://heikkeb.github.io/sign-in",
+  "start_url": "./sign-in",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
