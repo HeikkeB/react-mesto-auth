@@ -1,8 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Mesto React",
+  "name": "Mesto React Auth",
   "icons": [],
-  "start_url": ".",
+  "start_url": "./sign-in",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
