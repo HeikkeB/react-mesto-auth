@@ -1,5 +1,0 @@
-DOMAIN=https://auth.nomoreparties.co
-REACT_APP_BASE_URL=DOMAIN
-
-TOKEN=ee63acbb-034f-45d3-b9ee-d63e3206b34a
-REACT_APP_AUTH_TOKEN=TOKEN
