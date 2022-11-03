@@ -18,17 +18,18 @@ import * as auth from '../utils/auth'
 import { PopupWithConfirm } from './PopupWithConfirm'
 
 function App() {
-  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState('')
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState('')
-  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState('')
-  const [selectedCard, setSelectedCard] = React.useState('')
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false)
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
+    React.useState(false)
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
+  const [selectedCard, setSelectedCard] = React.useState(false)
   const [currentUser, setCurrentUser] = React.useState({})
   const [cards, setCards] = React.useState([])
   const [loggedIn, setLoggedIn] = React.useState(false)
   const [currentEmail, setCurrentEmail] = React.useState([])
-  const [infoTooltip, setInfoTooltip] = React.useState('')
+  const [infoTooltip, setInfoTooltip] = React.useState(false)
   const [successfulReg, setSuccesfulReg] = React.useState(false)
-  const [withConfirm, setWithConfirm] = React.useState('')
+  const [withConfirm, setWithConfirm] = React.useState({})
   const [deleteConfirm, setDeleteConfirm] = React.useState(false)
   const history = useNavigate()
   React.useEffect(() => {
@@ -57,6 +58,11 @@ function App() {
     handleToken()
   }, [])
 
+  function handleDeleteConfirm(card) {
+    setWithConfirm(card)
+    setDeleteConfirm(true)
+  }
+
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true)
   }
@@ -70,12 +76,12 @@ function App() {
   }
 
   function closeAllPopups() {
-    setEditAvatarPopupOpen('')
-    setEditProfilePopupOpen('')
-    setAddPlacePopupOpen('')
-    setSelectedCard('')
-    setInfoTooltip('')
-    setWithConfirm('')
+    setEditAvatarPopupOpen(false)
+    setEditProfilePopupOpen(false)
+    setAddPlacePopupOpen(false)
+    setSelectedCard(false)
+    setInfoTooltip(false)
+    setDeleteConfirm(false)
   }
 
   function handleCardClick(card) {
@@ -128,6 +134,7 @@ function App() {
         setCards((state) =>
           state.filter((c) => (c._id === card._id ? false : true))
         )
+        closeAllPopups()
       })
       .catch((err) => {
         console.log(err)
@@ -147,17 +154,18 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem('jwt')
+    //localStorage.removeItem('jwt')
     setLoggedIn(false)
   }
 
-  function handleRegister(email, password) {
+  function handleRegister({ email, password }) {
     auth
       .register(email, password)
       .then((res) => {
         if (res.statusCode !== 400) {
           setSuccesfulReg(true)
           history('/sign-in')
+          setCurrentEmail(email)
         }
       })
       .catch((err) => {
@@ -169,11 +177,13 @@ function App() {
       })
   }
 
-  function handleAuthorize(email, password) {
+  function handleAuthorize({ email, password }) {
     auth
       .authorize(email, password)
-      .then((data) => {
-        if (data.token) {
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem('jwt', res.token)
+          setCurrentEmail(email)
           setLoggedIn(true)
           history('/')
         }
@@ -212,7 +222,7 @@ function App() {
                     <Main
                       cards={cards}
                       onCardLike={handleCardLike}
-                      onCardDelete={handleCardDelete}
+                      onCardDelete={handleDeleteConfirm}
                       onEditAvatar={handleEditAvatarClick}
                       onEditProfile={handleEditProfileClick}
                       onAddPlace={handleAddPlaceClick}
@@ -257,8 +267,9 @@ function App() {
             />
             <PopupWithConfirm
               onClose={closeAllPopups}
-              isOpen={withConfirm}
-              confirm={deleteConfirm}
+              isOpen={deleteConfirm}
+              confirm={handleCardDelete}
+              card={withConfirm}
             />
           </div>
         </div>

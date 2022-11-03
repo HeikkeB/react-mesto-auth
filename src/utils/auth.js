@@ -13,9 +13,7 @@ export const register = (email, password) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
-  })
-    .then(handleResponse)
-    .then((res) => res)
+  }).then(handleResponse)
 }
 
 export const authorize = (email, password) => {
@@ -26,11 +24,7 @@ export const authorize = (email, password) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
-  })
-    .then(handleResponse)
-    .then((data) => {
-      localStorage.setItem('jwt', data.token)
-    })
+  }).then(handleResponse)
 }
 
 export const validateJWT = (token) => {
@@ -41,5 +35,4 @@ export const validateJWT = (token) => {
       Authorization: `Bearer ${token}`,
     },
   }).then(handleResponse)
-  //.then((data) => data)
 }
