@@ -22,7 +22,7 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
     React.useState(false)
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
-  const [selectedCard, setSelectedCard] = React.useState(false)
+  const [selectedCard, setSelectedCard] = React.useState(null)
   const [currentUser, setCurrentUser] = React.useState({})
   const [cards, setCards] = React.useState([])
   const [loggedIn, setLoggedIn] = React.useState(false)
@@ -32,31 +32,21 @@ function App() {
   const [withConfirm, setWithConfirm] = React.useState({})
   const [deleteConfirm, setDeleteConfirm] = React.useState(false)
   const history = useNavigate()
-  React.useEffect(() => {
-    api
-      .getUserInfo()
-      .then((data) => {
-        setCurrentUser(data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
 
   React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((res) => {
-        setCards(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
-
-  React.useEffect(() => {
-    handleToken()
-  }, [])
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      handleToken()
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+        .then(([data, card]) => {
+          setCurrentUser(data)
+          setCards(card)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }, [loggedIn])
 
   function handleDeleteConfirm(card) {
     setWithConfirm(card)
@@ -79,7 +69,7 @@ function App() {
     setEditAvatarPopupOpen(false)
     setEditProfilePopupOpen(false)
     setAddPlacePopupOpen(false)
-    setSelectedCard(false)
+    setSelectedCard(null)
     setInfoTooltip(false)
     setDeleteConfirm(false)
   }
@@ -170,6 +160,7 @@ function App() {
       })
       .catch((err) => {
         setSuccesfulReg(false)
+
         return console.log(err)
       })
       .finally(() => {
@@ -189,6 +180,8 @@ function App() {
         }
       })
       .catch((err) => console.log(err))
+    setSuccesfulReg(false)
+    setInfoTooltip(true)
   }
 
   function handleToken() {
