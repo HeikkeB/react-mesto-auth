@@ -1,24 +1,26 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 
 export function Login({ handleAuthorize }) {
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [values, setValues] = useState({})
 
-  React.useEffect(() => {
+  useEffect(() => {
     setEmail('')
     setPassword('')
   }, [])
 
-  function changeEmail(evt) {
-    setEmail(evt.target.value)
-  }
-
-  function changePassword(evt) {
-    setPassword(evt.target.value)
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
   }
 
   function handleSubmit(evt) {
     evt.preventDefault()
+    const { email, password } = values
     handleAuthorize({ email, password })
   }
 
@@ -34,8 +36,8 @@ export function Login({ handleAuthorize }) {
             type="email"
             placeholder="Email"
             required
-            value={email}
-            onChange={changeEmail}
+            value={values.email}
+            onChange={handleChange}
           />
           <input
             className="auth__input"
@@ -44,8 +46,9 @@ export function Login({ handleAuthorize }) {
             type="password"
             placeholder="Password"
             required
-            value={password}
-            onChange={changePassword}
+            value={values.password}
+            onChange={handleChange}
+            autoComplete="off"
           />
           <button className="auth__submit-btn">Войти</button>
         </form>

@@ -1,25 +1,27 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 export function Register({ handleRegister }) {
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [values, setValues] = useState({})
 
-  React.useEffect(() => {
+  useEffect(() => {
     setEmail('')
     setPassword('')
   }, [])
 
-  function changeEmail(evt) {
-    setEmail(evt.target.value)
-  }
-
-  function changePassword(evt) {
-    setPassword(evt.target.value)
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
   }
 
   function handleSubmit(evt) {
     evt.preventDefault()
+    const { email, password } = values
     handleRegister({ email, password })
   }
 
@@ -34,8 +36,8 @@ export function Register({ handleRegister }) {
             name="email"
             type="email"
             placeholder="Email"
-            value={email}
-            onChange={changeEmail}
+            value={values.email}
+            onChange={handleChange}
             required
           />
           <input
@@ -44,11 +46,12 @@ export function Register({ handleRegister }) {
             name="password"
             type="password"
             placeholder="Password"
-            value={password}
-            onChange={changePassword}
+            value={values.password}
+            onChange={handleChange}
             required
             //minLength="6"
             maxLength="18"
+            autoComplete="off"
           />
           <button className="auth__submit-btn">Зарегистрироваться</button>
         </form>

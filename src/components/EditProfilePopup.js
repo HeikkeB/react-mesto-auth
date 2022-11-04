@@ -1,28 +1,30 @@
 import PopupWithForm from './PopupWithForm'
-import React from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { currentUserContext } from '../contexts/CurrentUserContext'
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
-  const [name, setName] = React.useState('')
-  const [description, setDescription] = React.useState('')
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [values, setValues] = useState('')
 
-  const currentUser = React.useContext(currentUserContext)
+  const currentUser = useContext(currentUserContext)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setName(currentUser.name)
     setDescription(currentUser.about)
   }, [isOpen])
 
-  function handleChangeName(evt) {
-    setName(evt.target.value)
-  }
-
-  function handleChangeDescription(evt) {
-    setDescription(evt.target.value)
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
   }
 
   function handleSubmit(evt) {
     evt.preventDefault()
+    const { name, description } = values
     onUpdateUser({
       name,
       about: description,
@@ -44,13 +46,13 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           type="text"
           id="username"
           className="popup__input popup__input_name"
-          name="user"
+          name="name"
           placeholder="Имя"
           minLength="2"
           maxLength="40"
           required
-          onChange={handleChangeName}
-          value={name || ''}
+          onChange={handleChange}
+          value={values.name || ''}
         />
         <span className="popup__input-error" id="username-error"></span>
       </section>
@@ -59,13 +61,13 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           type="text"
           id="userinfo"
           className="popup__input popup__input_profession"
-          name="profession"
+          name="description"
           placeholder="Занятие"
           minLength="2"
           maxLength="200"
           required
-          onChange={handleChangeDescription}
-          value={description || ''}
+          onChange={handleChange}
+          value={values.description || ''}
         />
         <span className="popup__input-error" id="userinfo-error"></span>
       </section>

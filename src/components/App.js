@@ -9,7 +9,7 @@ import ImagePopup from './ImagePopup'
 import api from '../utils/Api'
 import { currentUserContext } from '../contexts/CurrentUserContext'
 import { LoggedContext } from '../contexts/LoggedContext'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 import { Register } from './Register'
 import { Login } from './Login'
 import { InfoTooltip } from './InfoTooltip'
@@ -179,9 +179,11 @@ function App() {
           history('/')
         }
       })
-      .catch((err) => console.log(err))
-    setSuccesfulReg(false)
-    setInfoTooltip(true)
+      .catch((err) => {
+        setSuccesfulReg(false)
+        setInfoTooltip(true)
+        console.log(err)
+      })
   }
 
   function handleToken() {
@@ -231,6 +233,12 @@ function App() {
               <Route
                 path="/sign-in"
                 element={<Login handleAuthorize={handleAuthorize} />}
+              />
+              <Route
+                path="*"
+                element={
+                  loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />
+                }
               />
             </Routes>
 
